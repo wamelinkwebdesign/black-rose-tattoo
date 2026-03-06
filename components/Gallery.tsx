@@ -1,16 +1,15 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const pieces = [
-  "Blackwork",
-  "Fine Line",
-  "Traditional",
-  "Neo-Traditional",
-  "Blackwork",
-  "Fine Line",
-  "Traditional",
-  "Neo-Traditional",
+  { src: "/images/gallery-1.jpg", label: "Blackwork" },
+  { src: "/images/gallery-2.jpg", label: "Fine Line" },
+  { src: "/images/gallery-3.jpg", label: "Traditional" },
+  { src: "/images/gallery-4.jpg", label: "Neo-Traditional" },
+  { src: "/images/gallery-5.jpg", label: "Blackwork" },
+  { src: "/images/gallery-6.jpg", label: "Fine Line" },
 ];
 
 export default function Gallery() {
@@ -39,9 +38,9 @@ export default function Gallery() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4"
+          className="grid grid-cols-2 gap-3 sm:grid-cols-3"
         >
-          {pieces.map((label, i) => (
+          {pieces.map((piece, i) => (
             <motion.div
               key={i}
               custom={i}
@@ -58,19 +57,23 @@ export default function Gallery() {
                 }),
               }}
               className="group relative aspect-[3/4] overflow-hidden"
-              style={{
-                background: "linear-gradient(180deg, #111 0%, #1a1a1a 100%)",
-              }}
             >
-              {/* Label */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-[9px] uppercase tracking-[0.3em] text-[#F5F0E8]/15">
-                  {label}
-                </span>
-              </div>
+              <Image
+                src={piece.src}
+                alt={piece.label}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
 
               {/* Hover overlay */}
               <div className="absolute inset-0 bg-[#C41E3A]/0 transition-all duration-500 group-hover:bg-[#C41E3A]/20" />
+
+              {/* Label on hover */}
+              <div className="absolute inset-0 flex items-end p-4 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                <span className="text-[9px] uppercase tracking-[0.3em] text-[#F5F0E8]">
+                  {piece.label}
+                </span>
+              </div>
             </motion.div>
           ))}
         </motion.div>

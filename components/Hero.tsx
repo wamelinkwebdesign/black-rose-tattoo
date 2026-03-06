@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const line = {
@@ -14,12 +15,20 @@ const line = {
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6">
-      {/* Background gradient */}
+      {/* Background image */}
+      <Image
+        src="/images/gallery-1.jpg"
+        alt=""
+        fill
+        priority
+        className="object-cover brightness-[0.35]"
+      />
+      {/* Gradient overlay on top of image */}
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 z-[1]"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 50% 100%, rgba(196,30,58,0.15) 0%, rgba(8,8,8,1) 70%)",
+            "radial-gradient(ellipse 80% 60% at 50% 100%, rgba(196,30,58,0.15) 0%, rgba(8,8,8,0.6) 70%)",
         }}
       />
 
@@ -33,14 +42,14 @@ export default function Hero() {
           <motion.span
             custom={0}
             variants={line}
-            className="block italic text-[clamp(3.5rem,10vw,12rem)]"
+            className="block italic text-[clamp(3.5rem,10vw,12rem)] text-[#F5F0E8]"
           >
             Where Art
           </motion.span>
           <motion.span
             custom={1}
             variants={line}
-            className="block text-[clamp(3.5rem,10vw,12rem)] text-[#C9A96E] md:translate-x-16"
+            className="block text-[clamp(3.5rem,10vw,12rem)] text-[#F5F0E8] md:translate-x-16"
           >
             Meets
           </motion.span>
@@ -70,13 +79,13 @@ export default function Hero() {
         >
           <a
             href="#booking"
-            className="magnetic-btn bg-[#C41E3A] px-8 py-3.5 text-[11px] uppercase tracking-[0.2em] text-[#F5F0E8] transition-all hover:bg-[#a01830]"
+            className="magnetic-btn border border-[#C41E3A] px-6 py-2.5 text-[10px] uppercase tracking-[0.2em] text-[#F5F0E8] transition-all hover:bg-[#C41E3A]/20"
           >
             Book a Session
           </a>
           <a
             href="#gallery"
-            className="magnetic-btn border border-[#F5F0E8]/20 px-8 py-3.5 text-[11px] uppercase tracking-[0.2em] text-[#F5F0E8]/80 transition-all hover:border-[#F5F0E8]/50 hover:text-[#F5F0E8]"
+            className="magnetic-btn border border-[#F5F0E8]/20 px-6 py-2.5 text-[10px] uppercase tracking-[0.2em] text-[#F5F0E8]/80 transition-all hover:border-[#F5F0E8]/50 hover:text-[#F5F0E8]"
           >
             View Gallery
           </a>
