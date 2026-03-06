@@ -2,20 +2,23 @@
 
 import { motion } from "framer-motion";
 
-export default function RoseSeal() {
+interface RoseSealProps {
+  className?: string;
+}
+
+export default function RoseSeal({ className }: RoseSealProps) {
   const text = "BLACK ROSE TATTOO & GALLERY \u00B7 AMSTERDAM \u00B7 EST. 2015 \u00B7 ";
 
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.85 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="relative flex items-center justify-center"
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className={`relative flex items-center justify-center ${className ?? ""}`}
     >
       <svg
         viewBox="0 0 300 300"
-        className="h-[280px] w-[280px] sm:h-[300px] sm:w-[300px]"
+        className="h-full w-full"
       >
         {/* Dark circle background */}
         <circle cx="150" cy="150" r="145" fill="#0a0a0a" />

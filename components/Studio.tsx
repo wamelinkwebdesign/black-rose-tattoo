@@ -1,7 +1,7 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import RoseSeal from "./RoseSeal";
 
 const stats = [
   { value: "344", label: "Reviews" },
@@ -81,10 +81,22 @@ export default function Studio() {
             </motion.div>
           </motion.div>
 
-          {/* Rose Seal */}
-          <div className="flex min-h-[400px] items-center justify-center lg:min-h-[500px]">
-            <RoseSeal />
-          </div>
+          {/* Studio photo */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="relative min-h-[400px] overflow-hidden lg:min-h-[500px]"
+          >
+            <Image
+              src="/images/gallery-3.jpg"
+              alt="Black Rose Tattoo studio interior"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/20" />
+          </motion.div>
         </div>
       </div>
     </section>
