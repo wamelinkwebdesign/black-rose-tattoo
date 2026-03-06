@@ -3,154 +3,116 @@
 import { motion } from "framer-motion";
 import RoseSeal from "./RoseSeal";
 
-/* ── Word-by-word mask reveal variant ── */
-const wordReveal = {
-  hidden: {},
-  visible: (delay: number) => ({
-    transition: { staggerChildren: 0.06, delayChildren: delay },
-  }),
-};
-
-const wordChild = {
-  hidden: { y: "110%", opacity: 0 },
-  visible: {
-    y: "0%",
-    opacity: 1,
-    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const },
-  },
-};
-
-/* ── Headline lines ── */
-const lines: { text: string; delay: number; className: string }[] = [
-  {
-    text: "Where Art",
-    delay: 0.3,
-    className:
-      "italic text-[clamp(3rem,8vw,9rem)] text-[#F5F0E8]",
-  },
-  {
-    text: "Meets",
-    delay: 0.45,
-    className:
-      "text-[clamp(3rem,8vw,9rem)] text-[#F5F0E8] md:translate-x-8",
-  },
-  {
-    text: "Skin.",
-    delay: 0.6,
-    className:
-      "text-[clamp(3.4rem,9vw,10.5rem)] text-[#C41E3A] font-bold",
-  },
-];
-
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden">
-      {/* ── Background image via CSS ── */}
-      <div
-        className="absolute inset-0"
+      {/* ── Background photo (plain img) ── */}
+      <img
+        src="/demos/black-rose/images/gallery-1.jpg"
+        alt=""
         style={{
-          backgroundImage: "url('/demos/black-rose/images/gallery-1.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: 0,
         }}
       />
 
       {/* ── Dark overlay ── */}
-      <div className="absolute inset-0 z-[1] bg-black/70" />
-
-      {/* ── Vignette overlay ── */}
       <div
-        className="absolute inset-0 z-[2] pointer-events-none"
         style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 1,
           background:
-            "radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%)",
+            "linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(8,8,8,0.85))",
         }}
       />
 
-      {/* ── Grain overlay ── */}
-      <div
-        className="fixed inset-0 z-[3] pointer-events-none opacity-[0.05]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          backgroundRepeat: "repeat",
-          backgroundSize: "128px 128px",
-        }}
-      />
-
-      {/* ── Content: split layout ── */}
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-6 lg:grid-cols-2 lg:gap-12 lg:px-12">
-        {/* ── Left: Typography ── */}
-        <div className="relative">
-          {/* ── Mobile-only Seal watermark (behind text) ── */}
-          <div className="absolute inset-0 flex items-center justify-center lg:hidden pointer-events-none">
-            <RoseSeal className="h-[280px] w-[280px] opacity-[0.15]" />
-          </div>
-
+      {/* ── Content ── */}
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-0 px-6 lg:grid-cols-2 lg:px-12">
+        {/* ── LEFT: heading + tagline + buttons (desktop) ── */}
+        <div>
           <motion.h1
-            className="relative font-[family-name:var(--font-playfair)] leading-[0.95]"
-            initial="hidden"
-            animate="visible"
+            className="font-[family-name:var(--font-playfair)]"
+            style={{ fontSize: "clamp(3rem, 8vw, 7rem)", lineHeight: 0.9 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
-            {lines.map((line) => (
-              <motion.span
-                key={line.text}
-                custom={line.delay}
-                variants={wordReveal}
-                className={`block overflow-hidden ${line.className}`}
-              >
-                {line.text.split(" ").map((word, wi) => (
-                  <motion.span
-                    key={wi}
-                    variants={wordChild}
-                    className="inline-block mr-[0.25em]"
-                  >
-                    {word}
-                  </motion.span>
-                ))}
-              </motion.span>
-            ))}
+            <span className="block text-[#F5F0E8]">Where Art</span>
+            <span className="block text-[#F5F0E8]">Meets</span>
+            <span className="block text-[#C41E3A]">Skin.</span>
           </motion.h1>
 
           {/* ── Tagline ── */}
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1, duration: 0.8 }}
-            className="relative mt-6 text-[11px] uppercase tracking-[0.4em] text-[#F5F0E8]/50"
+            transition={{ delay: 1, duration: 0.8 }}
+            className="mt-6 text-xs uppercase tracking-[0.3em] text-white/40"
           >
-            Amsterdam Centrum &middot; Est. 2015 &middot; By appointment
+            Amsterdam Centrum &middot; Est. 2015 &middot; By Appointment
           </motion.p>
+
+          {/* ── Buttons (desktop only, below tagline) ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.3, duration: 0.8 }}
+            className="mt-8 hidden gap-4 lg:flex"
+          >
+            <a
+              href="#booking"
+              className="bg-[#C41E3A] px-7 py-3 text-[11px] uppercase tracking-[0.25em] text-white transition-all hover:bg-[#C41E3A]/80"
+            >
+              Book a Session
+            </a>
+            <a
+              href="#gallery"
+              className="border border-white/30 px-7 py-3 text-[11px] uppercase tracking-[0.25em] text-white transition-all hover:border-white"
+            >
+              View Gallery
+            </a>
+          </motion.div>
         </div>
 
-        {/* ── Right: Rose Seal (desktop only, floating) ── */}
+        {/* ── RIGHT: Rose Seal ── */}
         <motion.div
-          className="hidden lg:flex items-center justify-end"
-          animate={{ y: [0, -12, 0] }}
+          className="mt-12 flex items-center justify-center lg:mt-0 lg:justify-end"
+          animate={{ y: [0, -10, 0] }}
           transition={{
             duration: 4,
             repeat: Infinity,
             ease: "easeInOut",
           }}
         >
-          <RoseSeal className="h-[450px] w-[450px]" />
+          <div
+            className="h-[320px] w-[320px] lg:h-[420px] lg:w-[420px]"
+            style={{ boxShadow: "0 0 60px rgba(196,30,58,0.15)" }}
+          >
+            <RoseSeal className="h-full w-full" />
+          </div>
         </motion.div>
 
-        {/* ── CTA buttons (full width row, below seal on desktop) ── */}
+        {/* ── Buttons (mobile only, below seal) ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4, duration: 0.8 }}
-          className="relative inline-flex gap-4 lg:col-span-2"
+          transition={{ delay: 1.3, duration: 0.8 }}
+          className="mt-8 flex gap-4 lg:hidden"
         >
           <a
             href="#booking"
-            className="bg-[#C41E3A] px-6 py-3 text-xs tracking-widest uppercase text-white transition-all hover:bg-[#C41E3A]/80"
+            className="bg-[#C41E3A] px-7 py-3 text-[11px] uppercase tracking-[0.25em] text-white transition-all hover:bg-[#C41E3A]/80"
           >
             Book a Session
           </a>
           <a
             href="#gallery"
-            className="border border-white/30 px-6 py-3 text-xs tracking-widest uppercase text-white transition-all hover:border-white"
+            className="border border-white/30 px-7 py-3 text-[11px] uppercase tracking-[0.25em] text-white transition-all hover:border-white"
           >
             View Gallery
           </a>
