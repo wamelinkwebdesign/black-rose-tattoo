@@ -11,10 +11,11 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #080808;
 }
 
 body {
-  background: #080808;
+  background-color: #080808;
   color: #F5F0E8;
   font-family: var(--font-body), sans-serif;
 }

@@ -27,6 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="theme-color" content="#080808" />
+      </head>
       <body
         className={`${playfair.variable} ${inter.variable} bg-[#080808] text-[#F5F0E8] antialiased font-[family-name:var(--font-inter)]`}
       >

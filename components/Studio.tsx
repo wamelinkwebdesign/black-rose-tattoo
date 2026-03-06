@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import RoseSeal from "./RoseSeal";
 
 const stats = [
   { value: "344", label: "Reviews" },
@@ -80,29 +81,10 @@ export default function Studio() {
             </motion.div>
           </motion.div>
 
-          {/* Atmospheric box */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-            className="relative flex min-h-[400px] items-center justify-center lg:min-h-[500px]"
-            style={{
-              background:
-                "linear-gradient(135deg, #111 0%, #0a0a0a 50%, #111 100%)",
-            }}
-          >
-            <div
-              className="absolute inset-0 opacity-30"
-              style={{
-                background:
-                  "radial-gradient(circle at 30% 70%, rgba(196,30,58,0.2) 0%, transparent 60%)",
-              }}
-            />
-            <span className="relative text-[10px] uppercase tracking-[0.4em] text-[#F5F0E8]/20">
-              Studio Interior
-            </span>
-          </motion.div>
+          {/* Rose Seal */}
+          <div className="flex min-h-[400px] items-center justify-center lg:min-h-[500px]">
+            <RoseSeal />
+          </div>
         </div>
       </div>
     </section>
