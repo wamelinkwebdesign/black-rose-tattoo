@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import RoseSeal from "./RoseSeal";
 
@@ -46,17 +45,18 @@ const lines: { text: string; delay: number; className: string }[] = [
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden">
-      {/* ── Background image ── */}
-      <Image
-        src="/images/gallery-1.jpg"
-        alt=""
-        fill
-        priority
-        className="object-cover"
+      {/* ── Background image via CSS ── */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: "url('/demos/black-rose/images/gallery-1.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       />
 
       {/* ── Dark overlay ── */}
-      <div className="absolute inset-0 z-[1] bg-black/65" />
+      <div className="absolute inset-0 z-[1] bg-black/70" />
 
       {/* ── Vignette overlay ── */}
       <div
@@ -80,9 +80,14 @@ export default function Hero() {
       {/* ── Content: split layout ── */}
       <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-6 lg:grid-cols-2 lg:gap-12 lg:px-12">
         {/* ── Left: Typography ── */}
-        <div>
+        <div className="relative">
+          {/* ── Mobile-only Seal watermark (behind text) ── */}
+          <div className="absolute inset-0 flex items-center justify-center lg:hidden pointer-events-none">
+            <RoseSeal className="h-[280px] w-[280px] opacity-[0.15]" />
+          </div>
+
           <motion.h1
-            className="font-[family-name:var(--font-playfair)] leading-[0.95]"
+            className="relative font-[family-name:var(--font-playfair)] leading-[0.95]"
             initial="hidden"
             animate="visible"
           >
@@ -111,36 +116,15 @@ export default function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1, duration: 0.8 }}
-            className="mt-6 text-[11px] uppercase tracking-[0.4em] text-[#F5F0E8]/50"
+            className="relative mt-6 text-[11px] uppercase tracking-[0.4em] text-[#F5F0E8]/50"
           >
             Amsterdam Centrum &middot; Est. 2015 &middot; By appointment
           </motion.p>
-
-          {/* ── CTA buttons ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4, duration: 0.8 }}
-            className="mt-10 flex flex-col gap-4 sm:flex-row"
-          >
-            <a
-              href="#booking"
-              className="magnetic-btn border border-[#C41E3A] px-8 py-3 text-xs tracking-[0.3em] uppercase text-[#F5F0E8] transition-all hover:bg-[#C41E3A]/20"
-            >
-              Book a Session
-            </a>
-            <a
-              href="#gallery"
-              className="magnetic-btn border border-[#F5F0E8]/20 px-8 py-3 text-xs tracking-[0.3em] uppercase text-[#F5F0E8]/80 transition-all hover:border-[#F5F0E8]/50 hover:text-[#F5F0E8]"
-            >
-              View Gallery
-            </a>
-          </motion.div>
         </div>
 
-        {/* ── Right: Rose Seal (floating) ── */}
+        {/* ── Right: Rose Seal (desktop only, floating) ── */}
         <motion.div
-          className="flex items-center justify-center lg:justify-end"
+          className="hidden lg:flex items-center justify-end"
           animate={{ y: [0, -12, 0] }}
           transition={{
             duration: 4,
@@ -148,7 +132,28 @@ export default function Hero() {
             ease: "easeInOut",
           }}
         >
-          <RoseSeal className="h-[280px] w-[280px] sm:h-[360px] sm:w-[360px] lg:h-[450px] lg:w-[450px]" />
+          <RoseSeal className="h-[450px] w-[450px]" />
+        </motion.div>
+
+        {/* ── CTA buttons (full width row, below seal on desktop) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.4, duration: 0.8 }}
+          className="relative inline-flex gap-4 lg:col-span-2"
+        >
+          <a
+            href="#booking"
+            className="bg-[#C41E3A] px-6 py-3 text-xs tracking-widest uppercase text-white transition-all hover:bg-[#C41E3A]/80"
+          >
+            Book a Session
+          </a>
+          <a
+            href="#gallery"
+            className="border border-white/30 px-6 py-3 text-xs tracking-widest uppercase text-white transition-all hover:border-white"
+          >
+            View Gallery
+          </a>
         </motion.div>
       </div>
 
