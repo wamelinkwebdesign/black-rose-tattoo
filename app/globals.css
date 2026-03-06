@@ -1,85 +1,66 @@
 @import "tailwindcss";
 
-@theme {
-  --color-dark: #0D0D0D;
-  --color-rose: #8B2252;
-  --color-cream: #F0EBE3;
-  --color-gold: #C4A46B;
-  --color-mid: #1A1A1A;
+@theme inline {
+  --color-background: #080808;
+  --color-foreground: #F5F0E8;
+  --color-crimson: #C41E3A;
+  --color-gold: #C9A96E;
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-inter);
 }
 
-/* Smooth scroll + body bg matches hero */
 html {
   scroll-behavior: smooth;
-  background-color: #0D0D0D;
 }
 
-/* Selection color */
-::selection {
-  background: #8B225240;
-  color: #F0EBE3;
+body {
+  background: #080808;
+  color: #F5F0E8;
+  font-family: var(--font-body), sans-serif;
 }
 
-/* Scroll indicator animation */
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
-  50% { opacity: 1; transform: scaleY(1); }
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-.scroll-line {
-  animation: scrollPulse 2s ease-in-out infinite;
+::-webkit-scrollbar-track {
+  background: #080808;
 }
 
-/* Safe area utilities for iOS Safari */
-.safe-top {
-  padding-top: env(safe-area-inset-top, 0px);
+::-webkit-scrollbar-thumb {
+  background: #C41E3A;
+  border-radius: 3px;
 }
 
-.safe-bottom {
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+::-webkit-scrollbar-thumb:hover {
+  background: #a01830;
 }
 
-/* Editorial rule */
-.editorial-rule {
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.1;
-  border: none;
-}
-
-/* Masonry-like grid for portfolio */
-.portfolio-grid {
-  columns: 2;
-  column-gap: 1rem;
-}
-
-@media (min-width: 768px) {
-  .portfolio-grid {
-    columns: 3;
-    column-gap: 1.25rem;
-  }
-}
-
-.portfolio-grid > * {
-  break-inside: avoid;
-  margin-bottom: 1rem;
-}
-
-@media (min-width: 768px) {
-  .portfolio-grid > * {
-    margin-bottom: 1.25rem;
-  }
-}
-
-/* Grain overlay */
+/* Noise grain overlay */
 .grain-overlay {
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: 50;
   pointer-events: none;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
+}
+
+/* Magnetic button */
+.magnetic-btn {
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.magnetic-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Selection */
+::selection {
+  background: #C41E3A;
+  color: #F5F0E8;
 }

@@ -1,50 +1,35 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 export default function Footer() {
   return (
-    <footer className="bg-dark text-cream border-t border-cream/5">
-      <div className="max-w-[1400px] mx-auto px-8 md:px-12 py-16 md:py-20">
-        <div className="grid md:grid-cols-12 gap-8 items-end">
-          {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="md:col-span-4"
-          >
-            <span className="font-[family-name:var(--font-cormorant)] text-[1.8rem] font-light tracking-[0.1em] uppercase text-cream/60">
-              Black Rose
-            </span>
-          </motion.div>
-
-          {/* Center */}
-          <div className="md:col-span-4 md:text-center">
-            <p className="font-[family-name:var(--font-cormorant)] text-[1rem] italic text-cream/20">
-              Tattoo & Gallery
-            </p>
+    <footer className="border-t border-[#C41E3A]/30 px-6 py-12 lg:px-12">
+      <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 text-center sm:flex-row sm:justify-between sm:text-left">
+        {/* Logo */}
+        <div>
+          <div className="font-[family-name:var(--font-playfair)] text-sm tracking-[0.3em] uppercase">
+            Black Rose
           </div>
-
-          {/* Right — address */}
-          <div className="md:col-span-4 md:text-right">
-            <p className="text-[0.75rem] tracking-[0.05em] text-cream/30">
-              Dirk van Hasseltssteeg 56, Amsterdam
-            </p>
+          <div className="mt-0.5 text-[9px] tracking-[0.3em] uppercase text-[#C9A96E]">
+            Tattoo & Gallery
           </div>
         </div>
 
-        {/* Bottom rule */}
-        <div className="h-px bg-cream/8 mt-12 mb-6" />
+        {/* Info */}
+        <div className="text-[10px] tracking-[0.2em] uppercase text-[#F5F0E8]/30">
+          Dirk van Hasseltssteeg 56, Amsterdam
+        </div>
 
-        <div className="flex flex-wrap justify-between items-center gap-4">
-          <p className="text-[0.7rem] text-cream/15 tracking-[0.05em]">
-            &copy; 2025 Black Rose Tattoo And Gallery
-          </p>
-          <p className="text-[0.7rem] text-cream/15 tracking-[0.05em]">
-            Amsterdam Centrum
-          </p>
+        {/* Social + copyright */}
+        <div className="flex flex-col items-center gap-2 sm:items-end">
+          <a
+            href="https://instagram.com/blackrosetattoo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] tracking-[0.2em] uppercase text-[#F5F0E8]/40 transition-colors hover:text-[#F5F0E8]"
+          >
+            @blackrosetattoo
+          </a>
+          <span className="text-[9px] tracking-[0.15em] text-[#F5F0E8]/20">
+            &copy; 2026 Black Rose Tattoo & Gallery
+          </span>
         </div>
       </div>
     </footer>

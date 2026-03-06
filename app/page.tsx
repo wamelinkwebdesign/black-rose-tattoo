@@ -1,8 +1,9 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Studio from "@/components/Studio";
-import Portfolio from "@/components/Portfolio";
-import Boeken from "@/components/Boeken";
+import Styles from "@/components/Styles";
+import Gallery from "@/components/Gallery";
+import Booking from "@/components/Booking";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -11,8 +12,9 @@ export default function Home() {
       <Nav />
       <Hero />
       <Studio />
-      <Portfolio />
-      <Boeken />
+      <Styles />
+      <Gallery />
+      <Booking />
       <Footer />
     </>
   );

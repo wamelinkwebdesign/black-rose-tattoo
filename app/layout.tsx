@@ -1,46 +1,37 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
-  weight: ["300", "400"],
-  style: ["normal", "italic"],
-  variable: "--font-cormorant",
   display: "swap",
 });
 
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500"],
   variable: "--font-inter",
+  subsets: ["latin"],
   display: "swap",
 });
 
-export const viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: "#0D0D0D",
-};
-
 export const metadata: Metadata = {
-  title: "Black Rose Tattoo & Gallery · Amsterdam Centrum",
+  title: "Black Rose Tattoo & Gallery — Amsterdam",
   description:
-    "Black Rose Tattoo And Gallery, tattoo studio in het hart van Amsterdam. Dirk van Hasseltssteeg 56, 1012 NE Amsterdam. 344 vijf-sterren reviews.",
+    "Intimate tattoo studio and art gallery in Amsterdam Centrum. Blackwork, fine line, traditional & neo-traditional tattoos by 10+ resident artists.",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
-    <html lang="nl">
+    <html lang="en">
       <body
-        className={`${cormorant.variable} ${inter.variable} font-[family-name:var(--font-inter)] bg-dark text-cream antialiased overflow-x-hidden`}
+        className={`${playfair.variable} ${inter.variable} bg-[#080808] text-[#F5F0E8] antialiased font-[family-name:var(--font-inter)]`}
       >
-        <div className="grain-overlay" />
         {children}
+        <div className="grain-overlay" aria-hidden="true" />
       </body>
     </html>
   );
